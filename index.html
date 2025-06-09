@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-    content="SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries">
+    content="LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries</title>
+  <title>LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -60,16 +60,16 @@
                 <a href="https://scholar.google.com/citations?user=tF-OmYgAAAAJ&hl=en">Wei-Jer Chang</a><sup>1</sup>,
               </span>
               <span class="author-block">
-                <a href="https://www.francescopittaluga.com/">Francesco Pittaluga</a><sup>2</sup>,
+                <a href="https://zhanwei.site/">Wei Zhan</a><sup>1</sup>,
               </span>
               <span class="author-block">
                 <a href="https://me.berkeley.edu/people/masayoshi-tomizuka/">Masayoshi Tomizuka</a><sup>1</sup>,
               </span>
               <span class="author-block">
-                <a href="https://zhanwei.site/">Wei Zhan</a><sup>1</sup>,
+                <a href="https://cseweb.ucsd.edu/~mkchan">Manmohan Chandraker</a><sup>2,3</sup>
               </span>
               <span class="author-block">
-                <a href="https://cseweb.ucsd.edu/~mkchan">Manmohan Chandraker</a><sup>2,3</sup>
+                <a href="https://www.francescopittaluga.com/">Francesco Pittaluga</a><sup>2</sup>,
               </span>
             </div>
 
@@ -84,7 +84,7 @@
               <div class="publication-links">
                 <!-- PDF Link. -->
                 <span class="link-block">
-                  <a href="https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/03157.pdf" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2504.11521" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
@@ -93,7 +93,7 @@
                   <!-- Arxiv Link. -->
                 </span>
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2401.00391" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2504.11521" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -103,8 +103,7 @@
                 <!-- Code Link. -->
                 <span class="link-block">
                   <!-- TODO modify to actual code in the future -->
-                  <a href="https://github.com/jxmmy7777/safe-sim.git"
-                    class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://langtraj.github.io/" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -114,12 +113,12 @@
                 <!-- Inference Code Announcement -->
 
                 <!-- Icon and ECCV 2024 text -->
-                <div class="icon-container">
+                <!-- <div class="icon-container">
                   <span class="icon-text">ECCV 2024</span>
-                </div>
+                </div> -->
 
                 <div class="announcement">
-                  <p class="is-size-6">We will realease the inference code soon.</p>
+                  <p class="is-size-6">We will realease dataset, please stay tuned!.</p>
                 </div>
               </div>
             </div>
@@ -137,31 +136,36 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Evaluating the performance of autonomous vehicle planning algorithms
-              necessitates simulating long-tail safety-critical traffic scenarios.
-              However, traditional methods for generating such scenarios often fall short in terms of controllability
-              and
-              realism; they also neglect the dynamics of agent interactions. To address these limitations, we introduce
-              SAFE-SIM, a novel diffusion-based controllable closed-loop safety-critical simulation framework. Our
-              approach yields two distinct advantages: 1) generating realistic long-tail safety-critical scenarios that
-              closely reflect real-world conditions, and 2) providing controllable adversarial behavior for more
-              comprehensive and interactive evaluations. We develop a novel approach to simulate safety-critical
-              scenarios through an adversarial term in the denoising process of diffusion models, which allows an
-              adversarial agent to challenge a planner with plausible maneuvers while all agents in the scene exhibit
-              reactive and realistic behaviors. Furthermore, we propose novel guidance objectives and a partial
-              diffusion process that enables users to control key aspects of the scenarios, such as the collision type
-              and aggressiveness of the adversarial agent, while maintaining the realism of the behavior. We validate
-              our framework empirically using the nuScenes and nuPlan datasets across multiple planners, demonstrating
-              improvements in both realism and controllability. These findings affirm that diffusion models provide a
-              robust and versatile foundation for safety-critical, interactive traffic simulation, extending their
-              utility across the broader autonomous driving landscape.
+              Evaluating autonomous vehicles with controllability enables scalable testing in counterfactual or
+              structured settings,
+              enhancing both efficiency and safety. We introduce LangTraj, a language-conditioned scene-diffusion model
+              that simulates
+              the joint behavior of all agents in traffic scenarios. By conditioning on natural language inputs,
+              LangTraj provides
+              flexible and intuitive control over interactive behaviors, generating nuanced and realistic scenarios.
+              Unlike prior
+              approaches that depend on domain-specific guidance functions, LangTraj incorporates language conditioning
+              during
+              training, facilitating more intuitive traffic simulation control. We propose a novel closed-loop training
+              strategy for
+              diffusion models, explicitly tailored to enhance stability and realism during closed-loop simulation. To
+              support
+              language-conditioned simulation, we develop Inter-Drive, a large-scale dataset with diverse and
+              interactive labels for
+              training language-conditioned diffusion models. Our dataset is built upon a scalable pipeline for
+              annotating agent-agent
+              interactions and single-agent behaviors, ensuring rich and varied supervision. Validated on the Waymo
+              Motion Dataset,
+              LangTraj demonstrates strong performance in realism, language controllability, and language-conditioned
+              safety-critical
+              simulation, establishing a new paradigm for flexible and scalable autonomous vehicle testing.
             </p>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="section video-section">
+  <!-- <section class="section video-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
@@ -175,7 +179,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <!-- Overall Framework -->
   <section class="section">
     <div class="container is-max-desktop">
