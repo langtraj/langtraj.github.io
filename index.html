@@ -189,11 +189,7 @@
         </div>
       </div>
       <!-- Figure (PDF) -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <img src="./static/images/fig_0_overview.svg" alt="Figure" width="100%" height="500px" />
-        </div>
-      </div>
+
       <!-- Text under the figure -->
       <div class="columns is-centered has-text-justified">
         <div class="column is-full-width">
@@ -208,9 +204,24 @@
           </div>
         </div>
       </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/fig_0_overview.svg" alt="Figure" width="100%" height="500px" />
+        </div>
+      </div>
   </section>
 
   <!-- Inter-Drive dataset -->
+  <style>
+    .scale-120 {
+      display: inline-block;
+      /* keeps layout tidy          */
+      transform: scale(1.2);
+      /* 1 .2 × larger              */
+      transform-origin: center top;
+      /* scale relative to the top  */
+    }
+  </style>
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
@@ -218,12 +229,7 @@
           <h2 class="title is-3">INTERDRIVE Dataset</h2>
         </div>
       </div>
-      <!-- Figure (PDF) -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <img src="./static/images/fig2_labeling_pipeline.svg" alt="Figure" width="100%" height="500px" />
-        </div>
-      </div>
+
       <!-- Text under the figure -->
       <div class="columns is-centered has-text-justified">
         <div class="column is-full-width">
@@ -240,9 +246,15 @@
           </div>
         </div>
       </div>
+      <!-- Figure (PDF) -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/interdrive_distribution.svg" alt="Figure" width="100%" height="500px" />
+          <img src="./static/images/fig2_labeling_pipeline.svg" alt="Figure" class="scale-120" />
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/interdrive_distribution.svg" alt="Figure" class="scale-120" />
         </div>
       </div>
   </section>
@@ -260,7 +272,7 @@
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/model_framework.svg" alt="Figure" width="100%" height="500px" />
+          <img src="./static/images/model_framework.svg" alt="Figure" class="scale-120" />
         </div>
       </div>
       <!-- Text under the figure -->
@@ -290,7 +302,7 @@
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/cl_train.svg" alt="Figure" width="75%" height="300px" />
+          <img src="./static/images/cl_train.svg" alt="Figure" width="60%" height="auto;" />
           <figcaption class="subtitle is-5 has-text-centered mt-2">
             Illustration of Closed-loop Training of diffusion models
           </figcaption>
@@ -313,7 +325,7 @@
             <div class="columns is-centered has-text-centered">
               <div class="column is-full-width">
                 <div class="video-container">
-                  <div class="video-title"><strong> Merge/Yield Behavior<strong></div>
+                  <div class="video-title is-size-4"><strong>Merge/Yield Behavior</strong></div>
 
                   <video class="centered-video" width="100%" autoplay loop muted>
                     <source src="./static/videos/source/1.mp4" type="video/mp4">
@@ -329,7 +341,7 @@
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <div class="video-container">
-                <div class="video-title"><strong>Intersection negotiation<strong></div>
+                <div class="video-title is-size-4"><strong>Intersection negotiation</strong></div>
                 <video class="centered-video" width="100%" autoplay loop muted>
                   <source src="./static/videos/source/2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
@@ -341,7 +353,7 @@
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <div class="video-container">
-                <div class="video-title"><strong>Yield/Pass Behavior</strong></div>
+                <div class="video-title is-size-4"><strong>Yield/Pass Behavior</strong></div>
 
                 <video class="centered-video" width="100%" autoplay loop muted>
                   <source src="./static/videos/source/3.mp4" type="video/mp4">
@@ -354,7 +366,7 @@
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <div class="video-container">
-                <div class="video-title"><strong>Pedestrian Crossing<strong></strong></div>
+                <div class="video-title is-size-4"><strong>Pedestrian Crossing</strong></div>
 
                 <video class="centered-video" width="100%" autoplay loop muted>
                   <source src="./static/videos/source/4.mp4" type="video/mp4">
