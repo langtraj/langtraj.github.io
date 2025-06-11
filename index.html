@@ -183,15 +183,15 @@
   <!-- Overall Framework -->
   <section class="section">
     <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
+      <!-- <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Overview</h2>
         </div>
-      </div>
+      </div> -->
       <!-- Figure (PDF) -->
 
       <!-- Text under the figure -->
-      <div class="columns is-centered has-text-justified">
+      <!-- <div class="columns is-centered has-text-justified">
         <div class="column is-full-width">
           <div class="content">
             <p>
@@ -203,7 +203,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <img src="./static/images/fig_0_overview.svg" alt="Figure" width="100%" height="500px" />
@@ -235,12 +235,12 @@
         <div class="column is-full-width">
           <div class="content">
             <p>
-              We introduce a large-scale dataset of human-annotated interactive behaviors to support interactive
-              simulation, behavior
-              analysis, and language-to-simulation research.
+              We introduce a large-scale dataset of <strong>human-annotated</strong> annotations focusing on
+              <strong>interactive behavior</strong> to support
+              behavior
+              analysis and language-to-simulation research.
               The dataset includes 125,000 Waymo scenes annotated with 209 distinct agent-agent interaction subtypes,
-              capturing
-              fine-grained multi-agent dynamics in diverse driving scenarios.
+              capturing fine-grained multi-agent dynamics in diverse driving scenarios.
               We also develop an automatic annotation pipeline for labeling single-agent behaviors.
             </p>
           </div>
@@ -266,7 +266,7 @@
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Language-Conditioned Scene Diffusion Model</h2>
+          <h2 class="title is-3 is-3 mt-6">Language-Conditioned Scene Diffusion Model</h2>
         </div>
       </div>
 
@@ -283,7 +283,7 @@
               <li>LangTraj is a scene-level diffusion backbone that directly conditions
                 on natural language via a BERT-based encoder. We apply LoRA for efficient end-to-end training,
                 summarizing
-                sentence via <cls> token to reduce computational cost.
+                sentence via <code>&lt;cls&gt;</code> token to reduce computational cost.
               </li>
 
               <li>To mitagate compunding errors during autoregressive rollout,
@@ -302,10 +302,11 @@
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/cl_train.svg" alt="Figure" width="60%" height="auto;" />
           <figcaption class="subtitle is-5 has-text-centered mt-2">
             Illustration of Closed-loop Training of diffusion models
           </figcaption>
+          <img src="./static/images/cl_train.svg" alt="Figure" width="60%" height="auto;" />
+
         </div>
       </div>
 
@@ -336,7 +337,7 @@
             </div>
           </div>
           <!-- Separator -->
-          <!-- <hr> -->
+          <hr>
           <!-- Synchronized Videos Section -->
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
@@ -349,6 +350,9 @@
               </div>
             </div>
           </div>
+
+          <!-- Separator -->
+          <hr>
 
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
@@ -363,6 +367,8 @@
             </div>
           </div>
 
+          <!-- Separator -->
+          <hr>
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <div class="video-container">
@@ -375,6 +381,9 @@
               </div>
             </div>
           </div>
+
+          <!-- Separator -->
+          <hr>
 
           <!-- Legend and PD Header and Bar -->
           <div class="container is-max-desktop">
@@ -404,7 +413,6 @@
 
             <!-- Videos -->
 
-
             <div class="columns is-centered has-text-justified">
               <div class="column is-full-width">
                 <div class="content">
@@ -417,23 +425,27 @@
               </div>
             </div>
 
+
+
             <div class="columns is-centered has-text-centered">
               <div class="column is-full-width">
                 <div class="video-container">
                   <video class="centered-video" width="100%" autoplay loop muted>
-                    <source src="./static/videos/5.mp4" type="video/mp4">
+                    <source src="./static/videos/source/5.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
             </div>
+            <!-- Separator -->
+            <hr>
 
             <div class="container is-max-desktop">
               <div class="columns is-centered has-text-centered">
                 <div class="column is-full-width">
                   <div class="video-container">
                     <video class="centered-video" width="100%" autoplay loop muted>
-                      <source src="./static/videos/6.mp4" type="video/mp4">
+                      <source src="./static/videos/source/6.mp4" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
                   </div>
