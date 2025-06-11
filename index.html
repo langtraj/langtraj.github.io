@@ -303,7 +303,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <figcaption class="subtitle is-5 has-text-centered mt-2">
-            Illustration of Closed-loop Training of diffusion models
+            <strong>Illustration of Closed-loop Training of diffusion models</strong>
           </figcaption>
           <img src="./static/images/cl_train.svg" alt="Figure" width="60%" height="auto;" />
 
@@ -311,9 +311,19 @@
       </div>
 
 
-
       <!-- Text-Conditioned Simulation Qualitative Results -->
       <div class="container is-max-desktop">
+        <div id="video-speed-control">
+          <label class="label is-size-5">Playback Speed:</label>
+          <div class="select is-medium">
+            <select id="video-speed-select">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x (Normal)</option>
+              <option value="2">2x</option>
+              <option value="4">4x</option>
+            </select>
+          </div>
+        </div>
 
         <div class="container is-max-desktop">
           <div class="columns is-centered has-text-centered">
@@ -578,7 +588,26 @@
   }
 </style> -->
 
+  <!-- control speed of the  videos-->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const speedSelect = document.getElementById('video-speed-select');
+      // grab all videos
+      const videos = document.querySelectorAll('video');
 
+      // debug: check we found them
+      console.log('Found videos:', videos);
+
+      speedSelect.addEventListener('change', function () {
+        const speed = parseFloat(this.value);
+        videos.forEach(video => {
+          video.playbackRate = speed;
+          // debug
+          console.log(`Set playbackRate to ${speed} on`, video);
+        });
+      });
+    });
+  </script>
   <!--  -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
