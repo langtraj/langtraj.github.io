@@ -53,8 +53,8 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-2 publication-title">SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with
-              Diffusion-Controllable Adversaries</h1>
+            <h1 class="title is-2 publication-title">LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned
+              Trajectory Simulation</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
                 <a href="https://scholar.google.com/citations?user=tF-OmYgAAAAJ&hl=en">Wei-Jer Chang</a><sup>1</sup>,
@@ -101,15 +101,15 @@
                   </a>
                 </span>
                 <!-- Code Link. -->
-                <span class="link-block">
-                  <!-- TODO modify to actual code in the future -->
-                  <a href="https://langtraj.github.io/" class="external-link button is-normal is-rounded is-dark">
+                <!-- <span class="link-block"> -->
+                <!-- TODO modify to actual code in the future -->
+                <!-- <a href="https://langtraj.github.io/" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
                     <span>Code</span>
                   </a>
-                </span>
+                </span> -->
                 <!-- Inference Code Announcement -->
 
                 <!-- Icon and ECCV 2024 text -->
@@ -118,7 +118,7 @@
                 </div> -->
 
                 <div class="announcement">
-                  <p class="is-size-6">We will realease dataset, please stay tuned!.</p>
+                  <p class="is-size-6">We will realease the dataset, please stay tuned!</p>
                 </div>
               </div>
             </div>
@@ -185,13 +185,13 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Overall Framework</h2>
+          <h2 class="title is-3">Overview</h2>
         </div>
       </div>
       <!-- Figure (PDF) -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/figure_1_overview_new.svg" alt="Figure" width="100%" height="500px" />
+          <img src="./static/images/fig_0_overview.svg" alt="Figure" width="100%" height="500px" />
         </div>
       </div>
       <!-- Text under the figure -->
@@ -199,30 +199,29 @@
         <div class="column is-full-width">
           <div class="content">
             <p>
-              SAFE-SIM evaluates a planner within scenarios featuring multiple controllable reactive agents.
-              These agents have two distinct roles:adversarial agents, which actively challenge the planner by
-              exhibiting
-              controllable adversarial behaviors such as specific collision types and levels of aggressiveness, and
-              non-adversarial agents, which follow normal driving behavior to maintain the realism of
-              the entire scene.
+              Our objective is to develop a language-conditioned diffusion model that enables flexible and intuitive
+              control of agent
+              behavior through text prompts. In contrast to prior work that often relies on domain-specific guidance
+              functions applied
+              post-training, our approach directly incorporates language conditioning during training.
             </p>
           </div>
         </div>
       </div>
   </section>
 
-  <!-- Guidance Framework -->
+  <!-- Inter-Drive dataset -->
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">How did we achieve this?</h2>
+          <h2 class="title is-3">INTERDRIVE Dataset</h2>
         </div>
       </div>
       <!-- Figure (PDF) -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <img src="./static/images/fig2_Gudiance_framework.svg" alt="Figure" width="100%" height="500px" />
+          <img src="./static/images/fig2_labeling_pipeline.svg" alt="Figure" width="100%" height="500px" />
         </div>
       </div>
       <!-- Text under the figure -->
@@ -230,31 +229,38 @@
         <div class="column is-full-width">
           <div class="content">
             <p>
-              With recent advances in trajectory diffusion models, we introduce a novel approach that incorporates an
-              adversarial term
-              in the denoising process. This allows an adv agent to challenge the planner with controllable adversarial
-              behaviors. This process optimizes the adversarial agent’s trajectory
-              using the adversarial cost function \(J_{\text{adv}}\) to influence the ego vehicle, while
-              \(J_{\text{reg}}\) is used for maintaining realism.
-
+              We introduce a large-scale dataset of human-annotated interactive behaviors to support interactive
+              simulation, behavior
+              analysis, and language-to-simulation research.
+              The dataset includes 125,000 Waymo scenes annotated with 209 distinct agent-agent interaction subtypes,
+              capturing
+              fine-grained multi-agent dynamics in diverse driving scenarios.
+              We also develop an automatic annotation pipeline for labeling single-agent behaviors.
             </p>
           </div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/interdrive_distribution.svg" alt="Figure" width="100%" height="500px" />
         </div>
       </div>
   </section>
 
-  <!-- TTC -->
+  <!-- Model -->
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Figure (PDF) -->
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <img src="./static/images/fig3_PD_framework.svg" alt="Figure" width="100%" height="500px" />
-      </div>
-    </div> -->
+
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Controllability on Time-to-Collision (TTC)</h2>
+          <h2 class="title is-3">Language-Conditioned Scene Diffusion Model</h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/model_framework.svg" alt="Figure" width="100%" height="500px" />
         </div>
       </div>
       <!-- Text under the figure -->
@@ -262,189 +268,192 @@
         <div class="column is-full-width">
           <div class="content">
             <p>
-              By varying the level of \(J_{\text{control}}\), we are able to vary the adversarial behavior within the
-              same scenario to challenge the planner.
+              <li>LangTraj is a scene-level diffusion backbone that directly conditions
+                on natural language via a BERT-based encoder. We apply LoRA for efficient end-to-end training,
+                summarizing
+                sentence via <cls> token to reduce computational cost.
+              </li>
+
+              <li>To mitagate compunding errors during autoregressive rollout,
+                we develop a
+                closed-loop training strategy for diffusion models to improve the realism. As shown below, first, the
+                model generates
+                multiple denoised trajectory candidates using forward diffusion from ground truth. The closest candidate
+                to the
+                ground truth is selected and then executed, enabling the model to
+                experience its own distribution during training
+              </li>
             </p>
           </div>
         </div>
       </div>
-      <!-- Legend and TTC Header and Bar -->
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width" style="position: relative;">
-        <img src="static/images/ttc_bar.png" alt="TTC Arrow" style="width: 100%; margin-bottom: 20px;">
-        <img src="static/images/legend.png" alt="Legend" style="position: absolute; top: -20px; right: 15px; width: 300px; margin-top: 10px;">
-      </div>
-    </div> -->
 
-
-      <!-- Videos 2 -->
-      <!-- Legend and TTC Header and Bar -->
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width" style="position: relative;">
-        <img src="static/images/ttc_bar.png" alt="TTC Arrow" style="width: 100%; margin-bottom: 20px;">
-        <img src="static/images/legend.png" alt="Legend" style="position: absolute; top: -20px; right: 15px; width: 300px; margin-top: 10px;">
-      </div>
-    </div> -->
-      <!-- whole from ppt -->
-      <div class="video-section"> <!-- Add this class to group these videos for synchronization -->
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <div class="video-container">
-
-              <video class="centered-video" width="100%" autoplay loop muted>
-                <source src="./static/videos/TTC_0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Separator -->
-      <hr>
-      <!-- Synchronized Videos Section -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <div class="video-container">
-            <video class="centered-video" width="100%" autoplay loop muted>
-              <source src="./static/videos/TTC_1.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
+          <img src="./static/images/cl_train.svg" alt="Figure" width="75%" height="300px" />
+          <figcaption class="subtitle is-5 has-text-centered mt-2">
+            Illustration of Closed-loop Training of diffusion models
+          </figcaption>
         </div>
       </div>
 
-      <!-- Partial Diffusion -->
+
+
+      <!-- Text-Conditioned Simulation Qualitative Results -->
       <div class="container is-max-desktop">
 
         <div class="container is-max-desktop">
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
-              <h2 class="title is-3">Partial Diffusion: User Control Flexibility</h2>
+              <h2 class="title is-3">Text-Conditioned Simulation Qualitative Results</h2>
             </div>
           </div>
-          <!-- Figure (PDF) -->
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-full-width">
-              <img src="./static/images/pd_illustration.svg" alt="Figure" width="100%" height="500px" />
-            </div>
-          </div>
-          <div class="columns is-centered has-text-justified">
-            <div class="column is-full-width">
-              <div class="content">
-                <p>
-                  Partial Diffusion process enables users to control key aspects of the scenarios.
-                  During the denoising process, instead of starting from pure noise, we begin with trajectories
-                  specified by humans or heuristics
-                  to incorporate human knowledge. Noise is then added and subsequently denoised.
-                  Users can adjust noise levels to balance between user control and the model’s data distribution.
-                  We generate proposals based on domain knowledge, such as collision types.
-                </p>
+
+          <div class="video-section"> <!-- Add this class to group these videos for synchronization -->
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <div class="video-container">
+                  <div class="video-title"><strong> Merge/Yield Behavior<strong></div>
+
+                  <video class="centered-video" width="100%" autoplay loop muted>
+                    <source src="./static/videos/source/1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- <div class="columns is-centered has-text-justified"> -->
-        <div class="columns is-centered has-text-justified">
-          <div class="column is-full-width has-text-centered">
-            <img src="./static/images/fig3_PD_framework.svg" alt="Figure" style="max-width:100%; height:auto;" />
-          </div>
-        </div>
-        <!-- <div> -->
-      </div>
-
-      <!-- Text under the figure -->
-
-      <!-- Legend and PD Header and Bar -->
-      <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <h2 class="title is-3.5"> Partial Diffusion: Control Collision Types</h2>
-          </div>
-        </div>
-
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width" style="position: relative;">
-            <img src="static/images/legend.png" alt="Legend"
-              style="position: absolute; top: 85px; right: 75px; width: 280px; margin-top: 10px;">
-          </div>
-        </div>
-
-        <div class="columns is-centered has-text-justified">
-          <div class="column is-full-width">
-            <div class="content" style="margin-bottom: 20px;">
-              <p>
-                Base on different trajectory proposals, we can control the collision types in the scene.
-                <br>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Videos -->
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <div class="video-container">
-              <video class="centered-video" width="100%" autoplay loop muted>
-                <source src="./static/videos/PD_0.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <div class="columns is-centered has-text-justified">
-          <div class="column is-full-width">
-            <div class="content">
-              <p>
-                We can also control the distance to conflict point to generate different interactive scenarios for the
-                planner evaluation.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="container is-max-desktop">
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-full-width">
-              <h2 class="title is-3.5"> Partial Diffusion: Control Distance to Conflict Point</h2>
-            </div>
-          </div>
+          <!-- Separator -->
+          <!-- <hr> -->
+          <!-- Synchronized Videos Section -->
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
               <div class="video-container">
+                <div class="video-title"><strong>Intersection negotiation<strong></div>
                 <video class="centered-video" width="100%" autoplay loop muted>
-                  <source src="./static/videos/PD_1.mp4" type="video/mp4">
+                  <source src="./static/videos/source/2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
             </div>
           </div>
-        </div>
+
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <div class="video-container">
+                <div class="video-title"><strong>Yield/Pass Behavior</strong></div>
+
+                <video class="centered-video" width="100%" autoplay loop muted>
+                  <source src="./static/videos/source/3.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <div class="video-container">
+                <div class="video-title"><strong>Pedestrian Crossing<strong></strong></div>
+
+                <video class="centered-video" width="100%" autoplay loop muted>
+                  <source src="./static/videos/source/4.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend and PD Header and Bar -->
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <h2 class="title is-3.5"> Text-Conditioned Safety-Critical Simulation</h2>
+              </div>
+            </div>
+            <!-- 
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width" style="position: relative;">
+            <img src="static/images/legend.png" alt="Legend"
+              style="position: absolute; top: 85px; right: 75px; width: 280px; margin-top: 10px;">
+          </div>
+        </div> -->
+
+            <div class="columns is-centered has-text-justified">
+              <div class="column is-full-width">
+                <div class="content" style="margin-bottom: 20px;">
+                  <p>
+
+                    <br>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Videos -->
+
+
+            <div class="columns is-centered has-text-justified">
+              <div class="column is-full-width">
+                <div class="content">
+                  <p>
+                    We demonstrate that direct language conditioning is compatible with extending beyond the training
+                    distribution by
+                    adopting guidance functions to generate safety-critical scenarios from text inputs.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <div class="video-container">
+                  <video class="centered-video" width="100%" autoplay loop muted>
+                    <source src="./static/videos/5.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <div class="container is-max-desktop">
+              <div class="columns is-centered has-text-centered">
+                <div class="column is-full-width">
+                  <div class="video-container">
+                    <video class="centered-video" width="100%" autoplay loop muted>
+                      <source src="./static/videos/6.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
   </section>
 
-  <section class="section">
+  <!-- <section class="section">
     <div class="container is-max-desktop">
       <!-- Key Findings Header -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Key Findings</h2>
-        </div>
-      </div>
-      <!-- Key Findings Content -->
-      <div class="columns is-centered">
-        <div class="column is-four-quarters">
-          <ul>
-            <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM enables the multiple controllable factors,
-              allowing for diverse scenario variations within the same scenario.</li>
-            <li><strong>Partial Diffusion for Explicit Control:</strong> Constructing tailored guidance functions for
-              specific targets can be challenging (e.g. collision types). Partial Diffusion provides a straightforward
-              method for user explicit control.</li>
-            <!-- <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM facilitates the manipulation of multiple variables, allowing for diverse scenario variations.</li> -->
-
-          </ul>
-        </div>
-      </div>
+  <!-- <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width">
+      <h2 class="title is-3">Key Findings</h2>
     </div>
-  </section>
+  </div>
+  Key Findings Content
+  <div class="columns is-centered">
+    <div class="column is-four-quarters">
+      <ul>
+        <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM enables the multiple controllable factors,
+          allowing for diverse scenario variations within the same scenario.</li>
+        <li><strong>Partial Diffusion for Explicit Control:</strong> Constructing tailored guidance functions for
+          specific targets can be challenging (e.g. collision types). Partial Diffusion provides a straightforward
+          method for user explicit control.</li>
+         <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM facilitates the manipulation of multiple variables, allowing for diverse scenario variations.</li> -->
+
+  <!-- </ul>
+    </div>
+  </div>
+  </div>
+  </section>  -->
 
   <!-- TABLE1 -->
   <!-- Safety-critical Traffic Simulation Table Section -->
@@ -551,14 +560,15 @@
     <div class="container is-max-desktop content">
       <div class="is-full-width"></div>
       <h2 class="title">BibTeX</h2>
-      <pre><code>@misc{chang2024safesimsafetycriticalclosedlooptraffic,
-      title={SAFE-SIM: Safety-Critical Closed-Loop Traffic Simulation with Diffusion-Controllable Adversaries}, 
-      author={Wei-Jer Chang and Francesco Pittaluga and Masayoshi Tomizuka and Wei Zhan and Manmohan Chandraker},
-      year={2024},
-      eprint={2401.00391},
+      <pre><code>@misc{chang2025langtrajdiffusionmodeldataset,
+      title={LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation},
+      author={Wei-Jer Chang and Wei Zhan and Masayoshi Tomizuka and Manmohan Chandraker and Francesco Pittaluga},
+      year={2025},
+      eprint={2504.11521},
       archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2401.00391}, 
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2504.11521},
+      }
 }
 
 </code></pre>
