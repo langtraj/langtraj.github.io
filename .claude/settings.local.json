@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Read(//Users/wjchang/Desktop/code/text2traj_exp/exp/1013_0507_heuristic_cfg_ablation_closed_loop_with_text_coll10.0_coarse_coll_buf0.4_lr1_dd1_fixL_t_n3_ns64_npr8_DH_cfgc0.0_cfgw0.5_fixL/whole_rollout/**)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
