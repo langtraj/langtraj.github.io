@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+  <!-- MATHJAX -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- </script>
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned
+              Trajectory Simulation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=tF-OmYgAAAAJ&hl=en">Wei-Jer Chang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://zhanwei.site/">Wei Zhan</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://me.berkeley.edu/people/masayoshi-tomizuka/">Masayoshi Tomizuka</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://cseweb.ucsd.edu/~mkchan">Manmohan Chandraker</a><sup>2,3</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://www.francescopittaluga.com/">Francesco Pittaluga</a><sup>2</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>University of California Berkeley,</span>
+              <span class="author-block"><sup>2</sup>NEC Labs America,</span>
+              <span class="author-block"><sup>3</sup>University of California San Diego</span>
+            </div>
+            <div class="is-size-5">ICCV 2025</div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2504.11521" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                  <!-- Arxiv Link. -->
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2504.11521" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <!-- <span class="link-block"> -->
+                <!-- TODO modify to actual code in the future -->
+                <!-- <a href="https://langtraj.github.io/" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span> -->
+                <!-- Inference Code Announcement -->
+
+                <!-- Icon and ECCV 2024 text -->
+                <!-- <div class="icon-container">
+                  <span class="icon-text">ECCV 2024</span>
+                </div> -->
+
+                <div class="announcement">
+                  <p class="is-size-6">We will realease the dataset, please stay tuned!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section abstract-section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Evaluating autonomous vehicles with controllability enables scalable testing in counterfactual or
+              structured settings,
+              enhancing both efficiency and safety. We introduce LangTraj, a language-conditioned scene-diffusion model
+              that simulates
+              the joint behavior of all agents in traffic scenarios. By conditioning on natural language inputs,
+              LangTraj provides
+              flexible and intuitive control over interactive behaviors, generating nuanced and realistic scenarios.
+              Unlike prior
+              approaches that depend on domain-specific guidance functions, LangTraj incorporates language conditioning
+              during
+              training, facilitating more intuitive traffic simulation control. We propose a novel closed-loop training
+              strategy for
+              diffusion models, explicitly tailored to enhance stability and realism during closed-loop simulation. To
+              support
+              language-conditioned simulation, we develop Inter-Drive, a large-scale dataset with diverse and
+              interactive labels for
+              training language-conditioned diffusion models. Our dataset is built upon a scalable pipeline for
+              annotating agent-agent
+              interactions and single-agent behaviors, ensuring rich and varied supervision. Validated on the Waymo
+              Motion Dataset,
+              LangTraj demonstrates strong performance in realism, language controllability, and language-conditioned
+              safety-critical
+              simulation, establishing a new paradigm for flexible and scalable autonomous vehicle testing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="section video-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <video controls width="800" height="600">
+              <source src="./static/videos/safe_sim.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- Overall Framework -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Overview</h2>
+        </div>
+      </div> -->
+      <!-- Figure (PDF) -->
+
+      <!-- Text under the figure -->
+      <!-- <div class="columns is-centered has-text-justified">
+        <div class="column is-full-width">
+          <div class="content">
+            <p>
+              Our objective is to develop a language-conditioned diffusion model that enables flexible and intuitive
+              control of agent
+              behavior through text prompts. In contrast to prior work that often relies on domain-specific guidance
+              functions applied
+              post-training, our approach directly incorporates language conditioning during training.
+            </p>
+          </div>
+        </div>
+      </div> -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/fig_0_overview.svg" alt="Figure" width="100%" height="500px" />
+        </div>
+      </div>
+  </section>
+
+  <!-- Inter-Drive dataset -->
+  <style>
+    .scale-120 {
+      display: inline-block;
+      /* keeps layout tidy          */
+      transform: scale(1.2);
+      /* 1 .2 × larger              */
+      transform-origin: center top;
+      /* scale relative to the top  */
+    }
+  </style>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">INTERDRIVE Dataset</h2>
+        </div>
+      </div>
+
+      <!-- Text under the figure -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-full-width">
+          <div class="content">
+            <p>
+              We introduce a large-scale dataset of <strong>human-annotated</strong> annotations focusing on
+              <strong>interactive behavior</strong> to support
+              behavior
+              analysis and language-to-simulation research.
+              The dataset includes 125,000 Waymo scenes annotated with 209 distinct agent-agent interaction subtypes,
+              capturing fine-grained multi-agent dynamics in diverse driving scenarios.
+              We also develop an automatic annotation pipeline for labeling single-agent behaviors.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Figure (PDF) -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/fig2_labeling_pipeline.svg" alt="Figure" class="scale-120" />
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/interdrive_distribution.svg" alt="Figure" class="scale-120" />
+        </div>
+      </div>
+  </section>
+
+  <!-- Model -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Figure (PDF) -->
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3 is-3 mt-6">Language-Conditioned Scene Diffusion Model</h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <img src="./static/images/model_framework.svg" alt="Figure" class="scale-120" />
+        </div>
+      </div>
+      <!-- Text under the figure -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-full-width">
+          <div class="content">
+            <p>
+              <li>LangTraj is a scene-level diffusion backbone that directly conditions
+                on natural language via a BERT-based encoder. We apply LoRA for efficient end-to-end training,
+                summarizing
+                sentence via <code>&lt;cls&gt;</code> token to reduce computational cost.
+              </li>
+
+              <li>To mitagate compunding errors during autoregressive rollout,
+                we develop a
+                closed-loop training strategy for diffusion models to improve the realism. As shown below, first, the
+                model generates
+                multiple denoised trajectory candidates using forward diffusion from ground truth. The closest candidate
+                to the
+                ground truth is selected and then executed, enabling the model to
+                experience its own distribution during training
+              </li>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <figcaption class="subtitle is-5 has-text-centered mt-2">
+            <strong>Illustration of Closed-loop Training of diffusion models</strong>
+          </figcaption>
+          <img src="./static/images/cl_train.svg" alt="Figure" width="60%" height="auto;" />
+
+        </div>
+      </div>
+      <!-- Unified Variant Selector -->
+      <section class="section">
+        <div class="container is-fluid" style="padding-left: 0; padding-right: 0;">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <h2 class="title is-3">Comparison to ProSim</h2>
+            </div>
+          </div>
+          <div class="columns is-centered has-text-justified">
+            <div class="column is-full-width">
+              <div class="content">
+                <p>
+                  We compare our language-conditioned simulation results with the
+                  <a href="https://ariostgx.github.io/ProSim/" target="_blank" rel="noopener">ProSim</a>
+                  baseline across different text prompts. For fairness, we use ProSim’s text format for the ProSim model
+                  and
+                  LangTraj’s text format for our model to describe the same behaviors, ensuring each model receives
+                  in-distribution prompts.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unified Variant Selector for Both Methods -->
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <div class="field">
+                <label class="label is-size-5">Text Variant:</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select id="unified-variant-select">
+                      <option value="auto">Auto-cycle through variants</option>
+                      <!-- Options will be populated by JavaScript -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ProSim Section -->
+          <div style="margin-top: 40px;">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <h3 class="title is-4">ProSim</h3>
+              </div>
+            </div>
+
+            <!-- ProSim Text Description (Above Videos) -->
+            <div class="columns is-centered" style="margin-bottom: 20px;">
+              <div class="column is-three-quarters">
+                <div id="prosim-text-description" class="box has-text-centered"
+                  style="background-color: #f5f5f5; padding: 20px;">
+                  <p class="is-size-5"><strong>Text Input:</strong> <span id="prosim-text-content">Loading...</span></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ProSim Video Grid Container -->
+            <div id="prosim-video-grid">
+              <!-- Videos will be dynamically inserted here -->
+            </div>
+          </div>
+
+          <!-- LangTraj Section -->
+          <div style="margin-top: 40px;">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <h3 class="title is-4">LangTraj (Our Method)</h3>
+              </div>
+            </div>
+
+            <!-- LangTraj Text Description (Above Videos) -->
+            <div id="langtraj-text-description" class="box has-text-centered"
+              style="background-color:#e8f4f8; padding:20px;">
+              <p class="is-size-5">
+                <strong>Text Input:</strong>
+                <span id="langtraj-text-content">Loading...</span>
+              </p>
+              <button id="langtraj-text-toggle" class="button is-small is-info" style="margin-top:8px;">Show Full
+                Text</button>
+            </div>
+
+            <!-- LangTraj Video Grid Container -->
+            <div id="langtraj-video-grid">
+              <!-- Videos will be dynamically inserted here -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Qualitative Observation -->
+      <div class="columns" style="margin-top: 30px;">
+        <div class="column is-full-width">
+          <p class="is-size-5" style="color: #333;">
+            Qualitatively, LangTraj produces more realistic and better instruction-following behaviors, especially in
+            interactive scenarios.
+          </p>
+        </div>
+      </div>
+
+      <!-- JavaScript for ProSim Comparison -->
+      <script>
+        // Variant mapping between ProSim and LangTraj
+        // Maps ProSim variant names to corresponding LangTraj variant names
+        const PROSIM_TO_LANGTRAJ = {
+          'baseline': 'base',  // ProSim baseline maps to LangTraj orig (original behavior)
+
+          // A2 -> A12 (correct mapping)
+          'A2_turn_left': 'A12_turn_left_simple',
+          'A2_turn_right': 'A12_turn_right_simple',
+          'A2_stop': 'A12_stop_only',
+
+          // A4 -> A3 (correct mapping)
+          'A4_turn_left': 'A3_turn_left_simple',
+          'A4_turn_right': 'A3_turn_right_simple',
+          'A4_stop': 'A3_stop_only',
+
+          // Yield mappings
+          // A4 yields (-> A3 yields), A2 keeps/pass (-> A12 keeps/pass)
+          'A4_yield_turn_left_A2_keepdrive': 'A3yield_leftA12pass',
+          'A4_yield_turn_left_A2_keepdrive_straight': 'A3yield_leftA12pass',
+          'A4_yield_turn_right_A2_keepdrive': 'A3yield_rightA12pass',
+
+          // A2 yields (-> A12 yields), A4 passes (-> A3 keeps)
+          // 'A2_yield_turn_left_A4_pass': 'A12yield_leftA3keepdrive',
+          'A2_yield_turn_right_A4_pass': 'A12yield_rightA3keepdrive'
+        };
+
+        // Reverse mapping
+        const LANGTRAJ_TO_PROSIM = {};
+        for (const [key, value] of Object.entries(PROSIM_TO_LANGTRAJ)) {
+          LANGTRAJ_TO_PROSIM[value] = key;
+        }
+
+        // Load and manage ProSim comparison videos
+        let prosimData = null;
+        let currentVariantIndex = 0;
+        let autoCycleInterval = null;
+        let hasStartedUnified = false; // Guard to start auto-cycle only once
+        const SCENE_ID = 30898; // Scene ID for ProSim comparison
+
+        async function loadProsimData() {
+          try {
+            const response = await fetch('./static/videos/source/prosim/prosim_text.json');
+            prosimData = await response.json();
+
+            // Find scene 30898
+            const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+            if (!scene) {
+              console.error('Scene 30898 not found');
+              return;
+            }
+
+            // Populate unified dropdown with ProSim variants
+            const select = document.getElementById('unified-variant-select');
+            scene.variants.forEach((variant, index) => {
+              const option = document.createElement('option');
+              option.value = index;
+              option.textContent = variant.text_input || variant.variant_name || 'Baseline (no text)';
+              select.appendChild(option);
+            });
+
+            // Set up event listener on unified dropdown
+            select.addEventListener('change', (e) => {
+              if (e.target.value === 'auto') {
+                startUnifiedAutoCycle();
+              } else {
+                stopUnifiedAutoCycle();
+                displayBothVariants(parseInt(e.target.value));
+              }
+            });
+
+            // Start auto-cycle if both datasets are loaded
+            if (langtrajData && !hasStartedUnified) {
+              hasStartedUnified = true;
+              startUnifiedAutoCycle();
+            }
+          } catch (error) {
+            console.error('Error loading ProSim data:', error);
+            document.getElementById('prosim-text-content').textContent = 'Error loading data';
+          }
+        }
+
+        function displayVariant(variantIndex, syncLangTraj = true) {
+          const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+          if (!scene || !scene.variants[variantIndex]) return;
+
+          const variant = scene.variants[variantIndex];
+          const videoGrid = document.getElementById('prosim-video-grid');
+          const textContent = document.getElementById('prosim-text-content');
+
+          // Update text description
+          textContent.textContent = variant.text_input || 'Baseline (no text condition)';
+
+          // Sync with LangTraj if enabled
+          if (syncLangTraj && typeof syncLangtrajToProsim === 'function') {
+            const langtrajVariantName = PROSIM_TO_LANGTRAJ[variant.variant_name];
+            if (langtrajVariantName) {
+              syncLangtrajToProsim(langtrajVariantName);
+            }
+          }
+
+          // Clear existing videos
+          videoGrid.innerHTML = '';
+
+          // Create a row with 3 samples (0, 1, 2)
+          const row = document.createElement('div');
+          row.className = 'columns is-gapless is-centered has-text-centered';
+          row.style.marginBottom = '20px';
+
+          for (let sample = 0; sample < 3; sample++) {
+            const col = document.createElement('div');
+            col.className = 'column is-one-third';
+
+            const videoContainer = document.createElement('div');
+            videoContainer.style.position = 'relative';
+
+            const video = document.createElement('video');
+            video.className = 'prosim-video';
+            video.width = '100%';
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.style.display = 'block';
+
+            // Construct video path
+            const videoPath = `./static/videos/source/prosim/scene_${SCENE_ID}_${variant.variant_name}_sample_${sample}_video.mp4`;
+
+            const source = document.createElement('source');
+            source.src = videoPath;
+            source.type = 'video/mp4';
+
+            video.appendChild(source);
+
+            // Add sample label
+            const label = document.createElement('div');
+            label.className = 'sample-indicator';
+            label.textContent = `Sample ${sample}`;
+            Object.assign(label.style, {
+              position: 'absolute',
+              top: '10px',
+              left: '10px',
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              color: 'white',
+              padding: '5px 10px',
+              borderRadius: '5px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              zIndex: '2'
+            });
+
+            videoContainer.appendChild(video);
+            videoContainer.appendChild(label);
+            col.appendChild(videoContainer);
+            row.appendChild(col);
+
+            // Apply playback speed - use global control
+            const speedSelect = document.getElementById('playbackSpeed');
+            if (speedSelect) {
+              video.playbackRate = parseFloat(speedSelect.value) || 1;
+            }
+          }
+
+          videoGrid.appendChild(row);
+        }
+
+        function startAutoCycle() {
+          stopAutoCycle(); // Clear any existing interval
+
+          const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+          if (!scene) return;
+
+          currentVariantIndex = 0;
+          displayVariant(currentVariantIndex);
+
+          // Cycle through variants every 5 seconds
+          autoCycleInterval = setInterval(() => {
+            currentVariantIndex = (currentVariantIndex + 1) % scene.variants.length;
+            displayVariant(currentVariantIndex);
+
+            // Update dropdown to show current variant (but keep value as 'auto')
+            // We'll just let it stay on auto
+          }, 5000);
+        }
+
+        function stopAutoCycle() {
+          if (autoCycleInterval) {
+            clearInterval(autoCycleInterval);
+            autoCycleInterval = null;
+          }
+        }
+
+        // Unified functions to display both ProSim and LangTraj variants together
+        function displayBothVariants(variantIndex) {
+          // Display ProSim variant
+          displayVariant(variantIndex, false);
+
+          // Find and display corresponding LangTraj variant
+          const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+          if (scene && scene.variants[variantIndex]) {
+            const prosimVariant = scene.variants[variantIndex];
+            const langtrajVariantName = PROSIM_TO_LANGTRAJ[prosimVariant.variant_name];
+
+            if (langtrajVariantName && langtrajData) {
+              const langtrajScene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+              if (langtrajScene) {
+                const langtrajIndex = langtrajScene.variants.findIndex(v => v.variant_name === langtrajVariantName);
+                if (langtrajIndex !== -1) {
+                  displayLangtrajVariant(langtrajIndex, false);
+                }
+              }
+            }
+          }
+        }
+
+        function startUnifiedAutoCycle() {
+          stopUnifiedAutoCycle();
+
+          const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+          if (!scene) return;
+
+          currentVariantIndex = 0;
+          displayBothVariants(currentVariantIndex);
+
+          // Cycle through variants every 5 seconds
+          autoCycleInterval = setInterval(() => {
+            currentVariantIndex = (currentVariantIndex + 1) % scene.variants.length;
+            displayBothVariants(currentVariantIndex);
+          }, 5000);
+        }
+
+        function stopUnifiedAutoCycle() {
+          stopAutoCycle();
+          if (typeof stopLangtrajAutoCycle === 'function') {
+            stopLangtrajAutoCycle();
+          }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadProsimData);
+      </script>
+
+      <!-- JavaScript for LangTraj Comparison -->
+      <script>
+        // Load and manage LangTraj comparison videos
+        let langtrajData = null;
+        let currentLangtrajVariantIndex = 0;
+        let langtrajAutoCycleInterval = null;
+        let langtrajVideoCompletionCounts = [0, 0, 0]; // Track play count for each of the 3 videos
+        let langtrajShowFullText = false; // Toggle state for text display
+        const LANGTRAJ_SCENE_ID = 30898; // Fixed scene ID for LangTraj
+        const PLAYS_BEFORE_SWITCH = 3; // Fixed: Play each variant 3 times before switching
+
+        // Function to sync LangTraj to ProSim variant
+        function syncLangtrajToProsim(langtrajVariantName) {
+          if (!langtrajData) return;
+
+          const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+          if (!scene) return;
+
+          const variantIndex = scene.variants.findIndex(v => v.variant_name === langtrajVariantName);
+          if (variantIndex !== -1) {
+            // Stop auto-cycle and display the matched variant
+            stopLangtrajAutoCycle();
+            displayLangtrajVariant(variantIndex, false); // false = don't sync back to ProSim
+
+            // Update dropdown to reflect the change
+            const select = document.getElementById('langtraj-variant-select');
+            if (select) {
+              select.value = variantIndex;
+            }
+          }
+        }
+
+        // Function to sync ProSim to LangTraj variant
+        function syncProsimToLangtraj(prosimVariantName) {
+          if (!prosimData) return;
+
+          const scene = prosimData.scenes.find(s => s.scene_id === SCENE_ID);
+          if (!scene) return;
+
+          const variantIndex = scene.variants.findIndex(v => v.variant_name === prosimVariantName);
+          if (variantIndex !== -1) {
+            // Stop auto-cycle and display the matched variant
+            stopAutoCycle();
+            displayVariant(variantIndex, false); // false = don't sync back to LangTraj
+
+            // Update dropdown to reflect the change
+            const select = document.getElementById('prosim-variant-select');
+            if (select) {
+              select.value = variantIndex;
+            }
+          }
+        }
+        function normalizeLangtrajData(data) {
+          if (!data?.scenes) return data;
+          data.scenes.forEach(scene => {
+            scene.variants?.forEach(v => {
+              // If full text is missing, derive it from parts
+              if (!v.text_input) {
+                const t1 = (v.text_input_1 || '').trim();
+                const t2 = (v.text_input_2 || '').trim();
+                const joined = [t1, t2].filter(Boolean).join('\n');
+                if (joined) v.text_input = joined;
+              }
+              // If simplified text missing, fall back to full text
+              if (!v.simplified_text_input && v.text_input) {
+                v.simplified_text_input = v.text_input;
+              }
+            });
+          });
+          return data;
+        }
+        async function loadLangtrajData() {
+          try {
+            const response = await fetch('./static/videos/source/langtraj/langtraj_text.json');
+            const raw = await response.json();              // parse ONCE
+            langtrajData = normalizeLangtrajData(raw);      // then normalize
+
+            // Find scene 30898
+            const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+            if (!scene) {
+              console.error('Scene 30898 not found in LangTraj data');
+              return;
+            }
+
+            // Set up text toggle button
+            const toggleButton = document.getElementById('langtraj-text-toggle');
+            toggleButton.addEventListener('click', () => {
+              langtrajShowFullText = !langtrajShowFullText;
+              toggleButton.textContent = langtrajShowFullText ? 'Show Simplified Text' : 'Show Full Text';
+              updateLangtrajTextDisplay();
+            });
+
+            // Start auto-cycle if both datasets are loaded
+            if (prosimData && !hasStartedUnified) {
+              hasStartedUnified = true;
+              startUnifiedAutoCycle();
+            }
+
+          } catch (error) {
+            console.error('Error loading LangTraj data:', error);
+            document.getElementById('langtraj-text-content').textContent = 'Error loading data';
+          }
+        }
+
+        function updateLangtrajTextDisplay() {
+          const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+          if (!scene || !scene.variants[currentLangtrajVariantIndex]) return;
+
+          const variant = scene.variants[currentLangtrajVariantIndex];
+          const textContent = document.getElementById('langtraj-text-content');
+
+          if (langtrajShowFullText) {
+            textContent.textContent = variant.text_input || ' no text condition';
+          } else {
+            textContent.textContent = variant.simplified_text_input || variant.text_input || ' no text condition';
+          }
+        }
+
+        function displayLangtrajVariant(variantIndex, syncProsim = true) {
+          const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+          if (!scene || !scene.variants[variantIndex]) return;
+
+          currentLangtrajVariantIndex = variantIndex;
+          const variant = scene.variants[variantIndex];
+          const videoGrid = document.getElementById('langtraj-video-grid');
+
+          // Update text description
+          updateLangtrajTextDisplay();
+
+          // Sync with ProSim if enabled
+          if (syncProsim && typeof syncProsimToLangtraj === 'function') {
+            const prosimVariantName = LANGTRAJ_TO_PROSIM[variant.variant_name];
+            if (prosimVariantName) {
+              syncProsimToLangtraj(prosimVariantName);
+            }
+          }
+
+          // Clear existing videos
+          videoGrid.innerHTML = '';
+
+          // Reset completion counts for new variant
+          langtrajVideoCompletionCounts = [0, 0, 0];
+
+          // Create a row with 3 samples (0, 1, 2)
+          const row = document.createElement('div');
+          row.className = 'columns is-gapless is-centered has-text-centered';
+          row.style.marginBottom = '20px';
+
+          for (let sample = 0; sample < 3; sample++) {
+            const col = document.createElement('div');
+            col.className = 'column is-one-third';
+
+            const videoContainer = document.createElement('div');
+            videoContainer.style.position = 'relative';
+
+            const video = document.createElement('video');
+            video.className = 'langtraj-video';
+            video.width = '100%';
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = false; // Change to false so we can count plays
+            video.playsInline = true;
+            video.style.display = 'block';
+            video.setAttribute('data-sample-index', sample);
+
+            // Construct video path
+            const videoPath = `./static/videos/source/langtraj/scene_${LANGTRAJ_SCENE_ID}_${variant.variant_name}_sample_${sample}_video.mp4`;
+
+            const source = document.createElement('source');
+            source.src = videoPath;
+            source.type = 'video/mp4';
+
+            video.appendChild(source);
+
+            // Add sample label
+            const label = document.createElement('div');
+            label.className = 'sample-indicator';
+            label.textContent = `Sample ${sample}`;
+            Object.assign(label.style, {
+              position: 'absolute',
+              top: '10px',
+              left: '10px',
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              color: 'white',
+              padding: '5px 10px',
+              borderRadius: '5px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              zIndex: '2'
+            });
+
+            // Add event listener to track video completions
+            video.addEventListener('ended', function () {
+              const sampleIndex = parseInt(this.getAttribute('data-sample-index'));
+              langtrajVideoCompletionCounts[sampleIndex]++;
+
+              // Check if ALL videos have completed the required number of plays
+              const minPlays = Math.min(...langtrajVideoCompletionCounts);
+              if (minPlays >= PLAYS_BEFORE_SWITCH && langtrajAutoCycleInterval) {
+                // All videos have played required times, switch to next variant
+                const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+                if (scene) {
+                  currentLangtrajVariantIndex = (currentLangtrajVariantIndex + 1) % scene.variants.length;
+                  displayLangtrajVariant(currentLangtrajVariantIndex, true); // true = sync with ProSim
+                  return; // Don't restart this video
+                }
+              }
+
+              // Otherwise, restart the video
+              this.currentTime = 0;
+              this.play();
+            });
+
+            videoContainer.appendChild(video);
+            videoContainer.appendChild(label);
+            col.appendChild(videoContainer);
+            row.appendChild(col);
+
+            // Apply playback speed - use global control
+            const speedSelect = document.getElementById('playbackSpeed');
+            if (speedSelect) {
+              video.playbackRate = parseFloat(speedSelect.value) || 1;
+            }
+          }
+
+          videoGrid.appendChild(row);
+        }
+
+        function startLangtrajAutoCycle() {
+          stopLangtrajAutoCycle(); // Clear any existing flag
+
+          const scene = langtrajData.scenes.find(s => s.scene_id === LANGTRAJ_SCENE_ID);
+          if (!scene) return;
+
+          currentLangtrajVariantIndex = 0;
+          langtrajAutoCycleInterval = true; // Use as a flag to enable auto-cycling
+          displayLangtrajVariant(currentLangtrajVariantIndex);
+        }
+
+        function stopLangtrajAutoCycle() {
+          langtrajAutoCycleInterval = null;
+          langtrajVideoCompletionCounts = [0, 0, 0];
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+          loadLangtrajData();
+        });
+      </script>
+
+      <!-- JavaScript for Sequential Video Playback -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const speedSelect = document.getElementById('video-speed-select');
+          const getSpeed = () => speedSelect ? (parseFloat(speedSelect.value) || 1) : 1;
+
+          const sequentialVideos = document.querySelectorAll('.sequential-video');
+
+          sequentialVideos.forEach(video => {
+            const listAttr = video.getAttribute('data-videos');
+            if (!listAttr) return;
+
+            let videoList;
+            try { videoList = JSON.parse(listAttr); } catch { return; }
+            if (!Array.isArray(videoList) || videoList.length === 0) return;
+
+            // Ensure correct attributes for sequential playback
+            video.removeAttribute('loop');
+            video.setAttribute('playsinline', '');
+            video.muted = true; // keep autoplay safe
+            // Ensure overlay container is positioned
+            const container = video.parentElement;
+            if (container && getComputedStyle(container).position === 'static') {
+              container.style.position = 'relative';
+            }
+
+            // Create or reuse indicator
+            let badge = container.querySelector('.sample-indicator');
+            if (!badge) {
+              badge = document.createElement('div');
+              badge.className = 'sample-indicator';
+              Object.assign(badge.style, {
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                backgroundColor: 'rgba(0,0,0,0.7)',
+                color: '#fff',
+                padding: '5px 10px',
+                borderRadius: '5px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                zIndex: '2'
+              });
+              container.appendChild(badge);
+            }
+
+            let currentIndex = 0;
+            const updateBadge = () => { badge.textContent = `Sample ${currentIndex}`; };
+
+            const playIndex = (idx) => {
+              currentIndex = idx % videoList.length;
+              video.src = videoList[currentIndex];
+              video.load();
+              video.playbackRate = getSpeed();
+              const p = video.play();
+              if (p && typeof p.catch === 'function') p.catch(() => { });
+              updateBadge();
+            };
+
+            video.addEventListener('ended', () => playIndex(currentIndex + 1));
+
+            // Initialize
+            playIndex(0);
+          });
+        });
+      </script>
+      <!-- Global Video Controls -->
+      <div id="globalVideoControls" class="global-video-controls"
+        style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); padding: 12px 20px; border-top: 2px solid #ddd; box-shadow: 0 -2px 10px rgba(0,0,0,0.15);">
+        <div
+          style="display: flex; align-items: center; gap: 15px; max-width: 1400px; margin: 0 auto; justify-content: center;">
+          <button id="globalPlayPause" class="button is-primary" style="min-width: 80px;">Play</button>
+          <input type="range" id="globalProgress" min="0" max="100" value="0"
+            style="flex: 1; max-width: 400px; height: 8px; cursor: pointer;">
+          <span id="timeDisplay" style="min-width: 100px; font-family: monospace; font-size: 14px;">0:00 /
+            0:00</span>
+          <button id="globalReset" class="button is-light">Reset</button>
+          <select id="playbackSpeed" class="select is-small" style="min-width: 80px;">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+            <option value="4">4x</option>
+          </select>
+        </div>
+      </div>
+      <!-- Videos -->
+      <!-- 
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width" style="position: relative;">
+            <img src="static/images/legend.png" alt="Legend"
+              style="position: absolute; top: 85px; right: 75px; width: 280px; margin-top: 10px;">
+          </div>
+        </div> -->
+      <!-- CFG Comparison Section -->
+      <hr style="margin-top: 40px; margin-bottom: 40px;">
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h3 class="title is-4">Classifier-Free Guidance (CFG) Comparison</h3>
+        </div>
+      </div>
+
+      <!-- Shared Text Condition -->
+      <!-- Shared Text Condition -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content has-text-left"
+            style="background-color: #f5f5f5; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+            <p style="margin-bottom: 0; font-size: 0.95em;">
+              <strong>Text Input:</strong><br>
+              <span style="color: #3273dc; font-weight: bold;">A3</span>: passes through an intersection without
+              stopping,
+              turning left.<br>
+              <span style="color: #48c774; font-weight: bold;">A12</span>: slows down and lets <span
+                style="color: #3273dc; font-weight: bold;">A3</span> pass at the intersection, turning right.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Three Column Video Comparison -->
+      <div class="columns is-centered">
+        <!-- CFG 0.0 Column -->
+        <div class="column is-one-third">
+          <div class="video-container" style="position: relative;">
+            <video class="centered-video cfg-video" width="100%" autoplay muted playsinline
+              data-video-list='["./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4",
+                                               "./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_1_video.mp4",
+                                               "./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_2_video.mp4",
+                                               "./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_3_video.mp4",
+                                               "./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_4_video.mp4"]'>
+              <source
+                src="./static/videos/source/cfg/0.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div style="text-align: center; margin-top: 8px; font-weight: bold; font-size: 1.1em;">CFG Weight: 0.0</div>
+          </div>
+        </div>
+
+        <!-- CFG 0.5 Column -->
+        <div class="column is-one-third">
+          <div class="video-container" style="position: relative;">
+            <video class="centered-video cfg-video" width="100%" autoplay muted playsinline
+              data-video-list='["./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4",
+                                               "./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_1_video.mp4",
+                                               "./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_2_video.mp4",
+                                               "./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_3_video.mp4",
+                                               "./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_4_video.mp4"]'>
+              <source
+                src="./static/videos/source/cfg/0.5/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div style="text-align: center; margin-top: 8px; font-weight: bold; font-size: 1.1em;">CFG Weight: 0.5</div>
+          </div>
+        </div>
+
+        <!-- CFG 1.0 Column -->
+        <div class="column is-one-third">
+          <div class="video-container" style="position: relative;">
+            <video class="centered-video cfg-video" width="100%" autoplay muted playsinline
+              data-video-list='["./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4",
+                                               "./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_1_video.mp4",
+                                               "./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_2_video.mp4",
+                                               "./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_3_video.mp4",
+                                               "./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_4_video.mp4"]'>
+              <source
+                src="./static/videos/source/cfg/1.0/scene_30898_A12yield_rightsimpleA3keepdrive_simple_pair_sample_0_video.mp4"
+                type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div style="text-align: center; margin-top: 8px; font-weight: bold; font-size: 1.1em;">CFG Weight: 1.0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discussion -->
+      <div class="columns is-centered has-text-justified">
+        <div class="column is-full-width">
+          <div class="content" style="margin-top: 20px;">
+            <p>
+              We observe that increasing the <strong>Classifier-Free Guidance </strong> weight in certain scenarios more
+              reliably
+              enforces text
+              conditioning, improving instruction-following even in challenging cases with minor realism tradeoff.
+
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript for CFG video cycling -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const cfgVideos = document.querySelectorAll('.cfg-video');
+          let currentIndex = 0;
+          const maxSamples = 3; // Only play samples 0, 1, 2
+          const badges = [];
+
+          // Get current playback speed from global control
+          const getCurrentSpeed = () => {
+            const speedSelect = document.getElementById('playbackSpeed');
+            return speedSelect ? parseFloat(speedSelect.value) || 1 : 1;
+          };
+
+          // Initialize all videos and badges
+          cfgVideos.forEach(video => {
+            const videoList = JSON.parse(video.getAttribute('data-video-list'));
+
+            // Store only first 3 samples
+            video.videoList = videoList.slice(0, maxSamples);
+
+            // Add sample badge
+            const container = video.parentElement;
+            const badge = document.createElement('div');
+            Object.assign(badge.style, {
+              position: 'absolute',
+              top: '10px',
+              right: '10px',
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              color: '#fff',
+              padding: '5px 10px',
+              borderRadius: '5px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              zIndex: '2'
+            });
+            container.appendChild(badge);
+            badges.push(badge);
+          });
+
+          // Update all badges
+          const updateBadges = () => {
+            badges.forEach(badge => {
+              badge.textContent = `Sample ${currentIndex}`;
+            });
+          };
+
+          // Play next sample for all videos synchronously
+          const playNextSample = () => {
+            currentIndex = (currentIndex + 1) % maxSamples;
+            const currentSpeed = getCurrentSpeed();
+
+            cfgVideos.forEach(video => {
+              video.src = video.videoList[currentIndex];
+              video.load();
+              video.playbackRate = currentSpeed; // Apply current speed
+              video.play().catch(() => { });
+            });
+
+            updateBadges();
+          };
+
+          // Listen to the first video's end to trigger all videos to next sample
+          if (cfgVideos.length > 0) {
+            cfgVideos[0].addEventListener('ended', playNextSample);
+          }
+
+          // Initialize all videos with sample 0 and start playing
+          cfgVideos.forEach(video => {
+            video.src = video.videoList[0];
+            video.load();
+            video.playbackRate = getCurrentSpeed(); // Set initial speed
+            // Start playing after a short delay to ensure load completes
+            setTimeout(() => {
+              video.play().catch(() => { });
+            }, 100);
+          });
+          updateBadges();
+        });
+      </script>
+
+
+
+    </div>
+  </section>
+  <!-- Text-Conditioned Simulation Qualitative Results -->
+  <!-- Legend and PD Header and Bar -->
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3.5"> Text-Conditioned Safety-Critical Simulation</h2>
+      </div>
+    </div>
+    <!-- Additional Description -->
+    <div class="columns is-centered has-text-justified">
+      <div class="column is-full-width">
+        <div class="content">
+          <p>
+            We demonstrate that direct language conditioning is compatible with extending beyond the
+            training distribution by adopting guidance functions to generate safety-critical scenarios from text
+            inputs.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="video-container">
+            <video class="centered-video" width="100%" autoplay muted loop playsinline>
+              <source src="./static/videos/source/5.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Separator -->
+    <hr>
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="video-container">
+            <video class="centered-video" width="100%" autoplay muted loop playsinline>
+              <source src="./static/videos/source/6.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text-Conditioned Simulation Qualitative Results -->
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">More Text-Conditioned Simulation Qualitative Results</h2>
+        </div>
+      </div>
+
+      <div class="video-section"> <!-- Add this class to group these videos for synchronization -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <div class="video-container">
+              <div class="video-title is-size-4"><strong>Merge/Yield Behavior</strong></div>
+
+              <video class="centered-video" width="100%" autoplay muted loop playsinline>
+                <source src="./static/videos/source/1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Separator -->
+      <hr>
+      <!-- Synchronized Videos Section -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="video-container">
+            <div class="video-title is-size-4"><strong>Intersection negotiation</strong></div>
+            <video class="centered-video" width="100%" autoplay muted loop playsinline>
+              <source src="./static/videos/source/2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Separator -->
+      <hr>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="video-container">
+            <div class="video-title is-size-4"><strong>Yield/Pass Behavior</strong></div>
+
+            <video class="centered-video" width="100%" autoplay muted loop playsinline>
+              <source src="./static/videos/source/3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Separator -->
+      <hr>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <div class="video-container">
+            <div class="video-title is-size-4"><strong>Pedestrian Crossing</strong></div>
+
+            <video class="centered-video" width="100%" autoplay muted loop playsinline>
+              <source src="./static/videos/source/4.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column is-full-width">
+              <h2 class="title is-3">Discussion and Future Directions</h2>
+              <div class="content has-text-justified">
+                <ol>
+                  <li><strong>Flexible controllability:</strong> LangTraj provides a flexible diffusion models that can
+                    combine guidance and direct conditioning for
+                    versatile controllability.</li>
+                  <li><strong>Realism:</strong> Sampling multiple times from the diffusion model can occasionally
+                    produce
+                    off-road behaviors even with closed-loop training, showing a gap compared to tokenized models.</li>
+                  <li><strong>Evaluation:</strong> Designing metrics for instruction-following beyond minADE remains an
+                    open
+                    challenge.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- <section class="section">
+    <div class="container is-max-desktop">
+    <!-- <div class="columns is-centered has-text-centered">
+    <div class="column is-full-width">
+      <h2 class="title is-3">Key Findings</h2>
+    </div>
+  </div>
+  Key Findings Content
+  <div class="columns is-centered">
+    <div class="column is-four-quarters">
+      <ul>
+        <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM enables the multiple controllable factors,
+          allowing for diverse scenario variations within the same scenario.</li>
+        <li><strong>Partial Diffusion for Explicit Control:</strong> Constructing tailored guidance functions for
+          specific targets can be challenging (e.g. collision types). Partial Diffusion provides a straightforward
+          method for user explicit control.</li>
+         <li><strong>Controllable Adversarial Behavior:</strong> SAFE-SIM facilitates the manipulation of multiple variables, allowing for diverse scenario variations.</li> -->
+
+      <!-- </ul>
+    </div>
+  </div>
+  </div>
+  </section>  -->
+
+      <!-- TABLE1 -->
+      <!-- Safety-critical Traffic Simulation Table Section -->
+      <!-- Safety-critical Traffic Simulation Table Section -->
+      <!-- <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Evaluation: Safety-critical Traffic Simulation</h2>
+      </div>
+    </div>
+
+     <div class="columns is-centered has-text-justified">
+      <div class="column is-full-width">
+        <p class="caption">
+          We compare our approach against STRIVE and DiffScene for safety-critical traffic simulation with a rule-based planner. 
+          SAFE-SIM outperforms STRIVE on all metrics and demonstrates higher collision rates and better realism than DiffScene.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Method</th>
+              <th>Collision<br> (%) &uarr;</th>
+              <th>Other<br>Offroad<br> (%) &darr;</th>
+              <th>Adv<br>Offroad <br> (%) &darr;</th>
+              <th>Collision<br>Rel Speed<br> (m/s) &darr;</th>
+              <th>Realism<br> &darr;</th>
+              <th>Time<br> (s) &darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3" class="is-vcentered">nuScenes</td>
+              <td class="is-vcentered">SAFE-SIM</td>
+              <td class="is-vcentered"><b>43.2</b></td>
+              <td class="is-vcentered"><b>1.8</b></td>
+              <td class="is-vcentered">11.4</td>
+              <td class="is-vcentered"><b>-0.12</b></td>
+              <td class="is-vcentered"><b>0.38</b></td>
+              <td class="is-vcentered"><b>104.5 &plusmn; 17.7</b></td>
+            </tr>
+            <tr>
+              <td class="is-vcentered">STRIVE</td>
+              <td class="is-vcentered">36.4</td>
+              <td class="is-vcentered">2.2</td>
+              <td class="is-vcentered">11.4</td>
+              <td class="is-vcentered">5.52</td>
+              <td class="is-vcentered">0.85</td>
+              <td class="is-vcentered">427.2 &plusmn; 169.8</td>
+            </tr>
+            <tr>
+              <td class="is-vcentered">DiffScene</td>
+              <td class="is-vcentered">18.2</td>
+              <td class="is-vcentered">11.4</td>
+              <td class="is-vcentered"><b>9.0</b></td>
+              <td class="is-vcentered">16.4</td>
+              <td class="is-vcentered">0.52</td>
+              <td class="is-vcentered">105.4 &plusmn; 22.5</td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="is-vcentered">nuPlan</td>
+              <td class="is-vcentered">SAFE-SIM</td>
+              <td class="is-vcentered"><b>80</b></td>
+              <td class="is-vcentered"><b>9.4</b></td>
+              <td class="is-vcentered">11.7</td>
+              <td class="is-vcentered">6.75</td>
+              <td class="is-vcentered"><b>0.27</b></td>
+              <td class="is-vcentered"><b>173.4 &plusmn; 73.3</b></td>
+            </tr>
+            <tr>
+              <td class="is-vcentered">DiffScene</td>
+              <td class="is-vcentered">56.7</td>
+              <td class="is-vcentered">14.0</td>
+              <td class="is-vcentered"><b>5.0</b></td>
+              <td class="is-vcentered"><b>-2.81</b></td>
+              <td class="is-vcentered">0.42</td>
+              <td class="is-vcentered">176.7 &plusmn; 77.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+   
+  </div>
+</section>
+
+<style>
+  .table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+</style> -->
+
+      <!-- Global Video Controls Script -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const playPauseBtn = document.getElementById('globalPlayPause');
+          const progressSlider = document.getElementById('globalProgress');
+          const timeDisplay = document.getElementById('timeDisplay');
+          const resetBtn = document.getElementById('globalReset');
+          const speedSelect = document.getElementById('playbackSpeed');
+
+          let isPlaying = false;
+          let isSeeking = false;
+
+          // Helper function to format time
+          function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+          }
+
+          // Get only comparison videos (ProSim and LangTraj), exclude qualitative videos
+          function getAllVideos() {
+            return document.querySelectorAll('.prosim-video, .langtraj-video, .cfg-video');
+          }
+
+          // Play/Pause button
+          playPauseBtn.addEventListener('click', () => {
+            const videos = getAllVideos();
+            if (isPlaying) {
+              videos.forEach(video => video.pause());
+              playPauseBtn.textContent = 'Play';
+              isPlaying = false;
+            } else {
+              videos.forEach(video => video.play());
+              playPauseBtn.textContent = 'Pause';
+              isPlaying = true;
+            }
+          });
+
+          // Reset button
+          resetBtn.addEventListener('click', () => {
+            const videos = getAllVideos();
+            videos.forEach(video => {
+              video.currentTime = 0;
+            });
+            progressSlider.value = 0;
+            updateTimeDisplay();
+          });
+
+          // Playback speed control
+          speedSelect.addEventListener('change', function () {
+            const speed = parseFloat(this.value);
+            const videos = getAllVideos();
+            videos.forEach(video => {
+              video.playbackRate = speed;
+            });
+          });
+
+          // Progress slider (seek bar)
+          progressSlider.addEventListener('input', function () {
+            isSeeking = true;
+            const videos = getAllVideos();
+            if (videos.length > 0 && videos[0].duration) {
+              const time = (parseInt(this.value) / 100) * videos[0].duration;
+              videos.forEach(video => {
+                if (video.duration && !isNaN(video.duration)) {
+                  video.currentTime = time;
+                }
+              });
+              updateTimeDisplay();
+            }
+          });
+
+          progressSlider.addEventListener('change', () => {
+            isSeeking = false;
+          });
+
+          // Update time display and progress slider
+          function updateTimeDisplay() {
+            const videos = getAllVideos();
+            if (videos.length > 0) {
+              const video = videos[0];
+              if (video.duration && !isNaN(video.duration)) {
+                const current = video.currentTime;
+                const total = video.duration;
+                timeDisplay.textContent = `${formatTime(current)} / ${formatTime(total)}`;
+
+                if (!isSeeking) {
+                  progressSlider.value = (current / total) * 100;
+                }
+              }
+            }
+          }
+
+          // Update progress bar periodically
+          setInterval(() => {
+            if (!isSeeking) {
+              updateTimeDisplay();
+            }
+          }, 100);
+
+          // Initialize with paused state
+          const videos = getAllVideos();
+          videos.forEach(video => {
+            video.pause();
+            video.addEventListener('loadedmetadata', updateTimeDisplay);
+          });
+          playPauseBtn.textContent = 'Play';
+          isPlaying = false;
+
+          // Apply current speed to any newly added comparison videos (fixes 4x speed persistence)
+          const observer = new MutationObserver(() => {
+            const currentSpeed = parseFloat(speedSelect.value) || 1;
+            document.querySelectorAll('.prosim-video, .langtraj-video').forEach(video => {
+              if (video.playbackRate !== currentSpeed) {
+                video.playbackRate = currentSpeed;
+              }
+            });
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+        });
+      </script>
+      <!--  -->
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <div class="is-full-width"></div>
+          <h2 class="title">BibTeX</h2>
+          <pre><code class="language-bibtex">@misc{chang2025langtrajdiffusionmodeldataset,
+      title = {LANGTRAJ: Diffusion Model and Dataset for Language-Conditioned Trajectory Simulation},
+      author = {Wei-Jer Chang and Wei Zhan and Masayoshi Tomizuka and Manmohan Chandraker and Francesco Pittaluga},
+      year = {2025},
+      eprint = {2504.11521},
+      archivePrefix = {arXiv},
+      primaryClass = {cs.LG},
+      url = {https://arxiv.org/abs/2504.11521}
+    }</code></pre>
+        </div>
+      </section>
+      </code></pre>
+    </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="is-full-width">
+            <div class="content has-text-centered">
+              <p><strong>Contact</strong></p>
+              <p>
+                <span class="icon" aria-hidden="true"><i class="fas fa-envelope"></i></span>
+                <a href="mailto:weijer_chang@berkeley.edu">weijer_chang@berkeley.edu</a>
+              </p>
+              <p>
+                Template borrowed from
+                <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">source code</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+</body>
+
+</html>

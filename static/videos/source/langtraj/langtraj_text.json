@@ -1,0 +1,120 @@
+{
+    "scenes": [
+        {
+            "scene_id": 7806,
+            "variants": [
+                {
+                    "variant_name": "A0_changelane_A1yield",
+                    "text_input": "<EGO>, <Agent 0>, a vehicle, smoothly changes lanes to overtake <OTHER>, <Agent 2> with precision. <OTHER>, <Agent 2>, a vehicle, slows down to let merging or lane-changing cars pass, yielding to <EGO>, <Agent 0>. <EGO>, <Agent 0>, a vehicle, is going straight, in middle lane, crossing an intersection <EGO>, <Agent 2>, a vehicle, slows down to let merging or lane-changing cars pass, yielding to <OTHER>, <Agent 0>. <OTHER>, <Agent 0>, a vehicle, smoothly changes lanes to overtake <EGO>, <Agent 2> with precision. <EGO>, <Agent 2>, a vehicle, is going straight, in middle lane, crossing an intersection",
+                    "simplified_text_input": "<EGO>, <Agent 0>, a vehicle, smoothly changes lanes to overtake <OTHER>, <Agent 2> with precision",
+                    "filename": "scene_7806_A0_changelane_A1yield.pkl"
+                },
+                {
+                    "variant_name": "A2_changelane_A1yield",
+                    "text_input": "<EGO>, <Agent 0>, a vehicle, slows down to let merging or lane-changing cars pass, yielding to <OTHER>, <Agent 2>. <OTHER>, <Agent 2>, a vehicle, moves into another lane to overtake <EGO>, <Agent 0>. <EGO>, <Agent 2>, a vehicle, moves into another lane to overtake <OTHER>, <Agent 0>. <OTHER>, <Agent 0>, a vehicle, slows down to let merging or lane-changing cars pass, yielding to <EGO>, <Agent 2>.",
+                    "simplified_text_input": "<EGO>, <Agent 0>, a vehicle, slows down to let merging or lane-changing cars pass, yielding to <OTHER>, <Agent 2>",
+                    "filename": "scene_7806_A2_changelane_A1yield.pkl"
+                },
+                {
+                    "variant_name": "A2_yieldbeforechange_A0",
+                    "text_input": "<EGO>, <Agent 0>, a vehicle, carefully follows the lead, maintaining a safe gap while matching the speed. <OTHER>, <Agent 2>, a vehicle, patiently yields before making a lane change or merging near <EGO>, <Agent 0>. <EGO>, <Agent 0>, a vehicle, is going straight, in middle lane, crossing an intersection <EGO>, <Agent 2>, a vehicle, patiently yields before making a lane change or merging near <OTHER>, <Agent 0>. <OTHER>, <Agent 0>, a vehicle, carefully follows the lead, maintaining a safe gap while matching the speed. <EGO>, <Agent 2>, a vehicle, is going straight, in middle lane, crossing an intersection",
+                    "simplified_text_input": "<EGO>, <Agent 0>, a vehicle, carefully follows the lead, maintaining a safe gap while matching the speed",
+                    "filename": "scene_7806_A2_yieldbeforechange_A0.pkl"
+                },
+                {
+                    "variant_name": "base",
+                    "text_input": null,
+                    "simplified_text_input": null,
+                    "filename": "scene_7806_base.pkl"
+                },
+                {
+                    "variant_name": "orig",
+                    "text_input": null,
+                    "simplified_text_input": null,
+                    "filename": "scene_7806_orig.pkl"
+                }
+            ]
+        },
+        {
+            "scene_id": 30898,
+            "variants": [
+                {
+                    "variant_name": "A12_stop_only",
+                    "simplified_text_input": "<A1> stops",
+                    "filename": "scene_30898_A12_stop_only.pkl",
+                    "text_input_1": null,
+                    "text_input_2": "<A1> is static"
+                },
+                {
+                    "variant_name": "A12_turn_left_simple",
+                    "simplified_text_input": "<A1> turns left",
+                    "filename": "scene_30898_A12_turn_left_simple.pkl",
+                    "text_input_1": null,
+                    "text_input_2": "<A1> is turning left"
+                },
+                {
+                    "variant_name": "A12_turn_right_simple",
+                    "simplified_text_input": "<A1> turns right",
+                    "filename": "scene_30898_A12_turn_right_simple.pkl",
+                    "text_input_1": null,
+                    "text_input_2": "<A1> is turning right"
+                },
+                {
+                    "variant_name": "A12yield_leftA3keepdrive",
+                    "simplified_text_input": "<A0> turns left, passes intersection; <A1> yields to <A0>, turns right",
+                    "filename": "scene_30898_A12yield_leftA3keepdrive.pkl",
+                    "text_input_1": "<A0> moves through the intersection while others wait to yield <A0> is in middle lane, turning left, crossing an intersection <A1> slows down and lets <A0> go first at the intersection",
+                    "text_input_2": "<A0> is in middle lane, turning left, crossing an intersection <A1> slows down and lets <A0> go first at the intersection <A1> is in rightmost lane, turning right, crossing an intersection"
+                },
+                {
+                    "variant_name": "A12yield_rightA3keepdrive",
+                    "simplified_text_input": "<A0> passes <A1>, turns right, passes intersection; <A1> yields to <A0>, turns left",
+                    "filename": "scene_30898_A12yield_rightA3keepdrive.pkl",
+                    "text_input_1": "<A0> moves through the intersection while other vehicles yield <A1> yields to <A0> at the intersection <A0> is in middle lane, turning right, crossing an intersection <A1> yields to <A0> at the intersection <A0> moves through the intersection while other vehicles yield",
+                    "text_input_2": "<A1> yields to <A0> at the intersection <A0> is in middle lane, turning right, crossing an intersection <A1> yields to <A0> at the intersection <A1> is in rightmost lane, turning left, crossing an intersection"
+                },
+                {
+                    "variant_name": "A3_stop_only",
+                    "simplified_text_input": "<A0> stops",
+                    "filename": "scene_30898_A3_stop_only.pkl",
+                    "text_input_1": "<A0> is static",
+                    "text_input_2": null
+                },
+                {
+                    "variant_name": "A3_turn_left_simple",
+                    "simplified_text_input": "<A0> turns left",
+                    "filename": "scene_30898_A3_turn_left_simple.pkl",
+                    "text_input_1": "<A0> is turning left",
+                    "text_input_2": null
+                },
+                {
+                    "variant_name": "A3_turn_right_simple",
+                    "simplified_text_input": "<A0> turns right",
+                    "filename": "scene_30898_A3_turn_right_simple.pkl",
+                    "text_input_1": "<A0> is turning right",
+                    "text_input_2": null
+                },
+                {
+                    "variant_name": "A3yield_leftA12pass",
+                    "simplified_text_input": "<A0> yields to <A1>, turns left; <A1> passes <A0> turns right",
+                    "filename": "scene_30898_A3yield_leftA12pass.pkl",
+                    "text_input_1": "<A0> is giving way at an intersection for <A1> <A0> is in middle lane, turning left, crossing an intersection <A1> moves through the intersection while other vehicles yield",
+                    "text_input_2": null
+                },
+                {
+                    "variant_name": "A3yield_rightA12pass",
+                    "simplified_text_input": "<A0> yields to <A1>, turns right; <A1> passes <A0>, turns left",
+                    "filename": "scene_30898_A3yield_rightA12pass.pkl",
+                    "text_input_1": "<A0> shows some yielding moves, slowing down at the intersection for <A1> <A0> is in middle lane, turning right, crossing an intersection <A1> passes through an intersection without stopping",
+                    "text_input_2": null
+                },
+                {
+                    "variant_name": "base",
+                    "text_input": null,
+                    "simplified_text_input": null,
+                    "filename": "scene_30898_base.pkl"
+                }
+            ]
+        }
+    ]
+}

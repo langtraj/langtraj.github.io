@@ -1,0 +1,108 @@
+{
+    "scenes": [
+        {
+            "scene_id": 30898,
+            "variants": [
+                {
+                    "variant_name": "baseline",
+                    "text_input": null,
+                    "text_idxs": [],
+                    "description": "Baseline (maps to orig.pkl or base.pkl)"
+                },
+                {
+                    "variant_name": "A2_turn_left",
+                    "text_input": "Have <A1> turn left.",
+                    "text_idxs": [
+                        2
+                    ],
+                    "description": "A2 turns left (maps to A3_turn_left_simple.pkl)"
+                },
+                {
+                    "variant_name": "A2_turn_right",
+                    "text_input": "Have <A1> turn right.",
+                    "text_idxs": [
+                        2
+                    ],
+                    "description": "A2 turns right (maps to A3_turn_right_simple.pkl)"
+                },
+                {
+                    "variant_name": "A2_stop",
+                    "text_input": "Have <A1> stop.",
+                    "text_idxs": [
+                        2
+                    ],
+                    "description": "A2 stops (maps to A3_stop_only.pkl)"
+                },
+                {
+                    "variant_name": "A4_turn_left",
+                    "text_input": "Have <A0> turn left.",
+                    "text_idxs": [
+                        4
+                    ],
+                    "description": "A4 turns left (maps to A12_turn_left_simple.pkl)"
+                },
+                {
+                    "variant_name": "A4_turn_right",
+                    "text_input": "Have <A0> turn right.",
+                    "text_idxs": [
+                        4
+                    ],
+                    "description": "A4 turns right (maps to A12_turn_right_simple.pkl)"
+                },
+                {
+                    "variant_name": "A4_stop",
+                    "text_input": "Have <A0> stop.",
+                    "text_idxs": [
+                        4
+                    ],
+                    "description": "A4 stops (maps to A12_stop_only.pkl)"
+                },
+                {
+                    "variant_name": "A4_yield_turn_left_A2_keepdrive",
+                    "text_input": "Let <A0> yield and turn left, <A1> keep driving.",
+                    "text_idxs": [
+                        4,
+                        2
+                    ],
+                    "description": "A4 yields and turns left, A2 keeps driving (maps to A12yield_leftA3keepdrive.pkl)"
+                },
+                {
+                    "variant_name": "A4_yield_turn_left_A2_keepdrive_straight",
+                    "text_input": "Let <A0> yield and turn left, <A1> keep driving straight.",
+                    "text_idxs": [
+                        4,
+                        2
+                    ],
+                    "description": "A4 yields and turns left, A2 drives straight (maps to A12yield_leftA3keepdrive_straight.pkl)"
+                },
+                {
+                    "variant_name": "A4_yield_turn_right_A2_keepdrive",
+                    "text_input": "Let <A0> yield and turn right, <A1> keep driving.",
+                    "text_idxs": [
+                        4,
+                        2
+                    ],
+                    "description": "A4 yields and turns right, A2 keeps driving (maps to A12yield_rightA3keepdrive.pkl)"
+                },
+                {
+                    "variant_name": "A2_yield_turn_left_A4_pass",
+                    "text_input": "Let <A1> yield and turn left, <A0> pass.",
+                    "text_idxs": [
+                        2,
+                        4
+                    ],
+                    "description": "A2 yields and turns left, A4 passes (maps to A3yield_leftA12pass.pkl)"
+                },
+                {
+                    "variant_name": "A2_yield_turn_right_A4_pass",
+                    "text_input": "Let <A1> yield and turn right, <A0> pass.",
+                    "text_idxs": [
+                        2,
+                        4
+                    ],
+                    "description": "A2 yields and turns right, A4 passes (maps to A3yield_rightA12pass.pkl)"
+                }
+            ]
+        }
+    ]
+}
